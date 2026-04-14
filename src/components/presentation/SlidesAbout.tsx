@@ -1,5 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ResponsiveContainer, LabelList } from "recharts";
 import Icon from "@/components/ui/icon";
+import LocationMap from "./LocationMap";
 import {
   GOLD, GOLD_LIGHT, SERIF,
   POOL_IMG, BAY_IMG, LOBBY_IMG, AERIAL_IMG, RESTAURANT_IMG,
@@ -370,61 +371,12 @@ export default function SlidesAbout() {
       <section id="location" className="py-24 px-6" style={{ background: "#F7F5F0" }}>
         <div className="max-w-6xl mx-auto">
           <SlideHeader num="Слайд 07" title="Уникальная локация" sub="Элитный район Толстого мыса · Сосновые рощи · Море" />
-
-          <div className="grid md:grid-cols-2 gap-8 mb-10">
-            <div className="space-y-1">
-              <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                <span className="col-span-2">Объект</span><span className="text-right">Время</span>
-              </div>
-              {[
-                { obj: "Яхтенная марина", note: "На территории", time: "1–2 мин", hot: true },
-                { obj: "Вертолётная площадка", note: "~1,5 км", time: "3 мин", hot: false },
-                { obj: "Аэропорт Геленджик", note: "10 км", time: "15–20 мин", hot: false },
-                { obj: "Набережная «Круча»", note: "~1 км", time: "10 мин пешком", hot: false },
-                { obj: "Пляж «Сады морей»", note: "~1,5 км", time: "5–10 мин", hot: false },
-                { obj: "Санаторная зона", note: "~1–2 км", time: "3–5 мин", hot: false },
-              ].map((row, i) => (
-                <div key={i} className="grid grid-cols-3 py-3 border-b border-gray-100 items-center">
-                  <div className="col-span-2">
-                    <span className={`text-sm ${row.hot ? "font-bold" : "text-gray-700"}`}
-                      style={row.hot ? { color: GOLD } : {}}>
-                      {row.obj}
-                    </span>
-                    <div className="text-gray-400 text-xs">{row.note}</div>
-                  </div>
-                  <div className="text-right text-sm font-semibold" style={{ color: GOLD }}>{row.time}</div>
-                </div>
-              ))}
-            </div>
-            <div className="space-y-1">
-              <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                <span className="col-span-2">Объект</span><span className="text-right">Время</span>
-              </div>
-              {[
-                { obj: "Винодельня «Шато де Талю»", note: "~7 км", time: "15 мин" },
-                { obj: "Центральная набережная", note: "~7 км", time: "15 мин" },
-                { obj: "Центр города (ТЦ, кино)", note: "~6 км", time: "15 мин" },
-                { obj: "Центр «Белый Мыс»", note: "~9 км", time: "20 мин / 30 мин (яхта)" },
-                { obj: "Аквапарк «Золотая Бухта»", note: "~10 км", time: "20 мин" },
-                { obj: "Гольф-клуб «Геленджик»", note: "~12 км", time: "20 мин" },
-              ].map((row, i) => (
-                <div key={i} className="grid grid-cols-3 py-3 border-b border-gray-100 items-center">
-                  <div className="col-span-2">
-                    <span className="text-sm text-gray-700">{row.obj}</span>
-                    <div className="text-gray-400 text-xs">{row.note}</div>
-                  </div>
-                  <div className="text-right text-sm font-semibold" style={{ color: GOLD }}>{row.time}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Photo banner with quote */}
-          <div className="relative rounded-sm overflow-hidden h-72 shadow-xl">
+          <LocationMap />
+          <div className="mt-8 relative rounded-sm overflow-hidden h-48 shadow-xl">
             <img src={AERIAL_IMG} alt="Локация" className="w-full h-full object-cover" />
             <div className="absolute inset-0 flex items-end p-8"
               style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }}>
-              <p className="text-white/90 italic" style={{ fontFamily: SERIF, fontSize: "1.15rem" }}>
+              <p className="text-white/90 italic" style={{ fontFamily: SERIF, fontSize: "1.1rem" }}>
                 «Уникальное сочетание природного уединения и доступности всей премиальной инфраструктуры курорта.»
               </p>
             </div>
