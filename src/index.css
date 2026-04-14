@@ -1,4 +1,5 @@
 @import url("https://cdn.jsdelivr.net/npm/@fontsource/variable-noto-sans@5.0.0/index.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -99,12 +100,15 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family:
-      "Noto Sans Variable",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  }
+
+  .font-serif-elegant {
+    font-family: "Cormorant Garamond", Georgia, serif;
+  }
+
+  .font-heading {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   }
 }
 
