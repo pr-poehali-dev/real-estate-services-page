@@ -1,7 +1,8 @@
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ResponsiveContainer, LabelList } from "recharts";
 import Icon from "@/components/ui/icon";
 import {
   GOLD, GOLD_LIGHT, SERIF,
-  POOL_IMG, BAY_IMG, LOBBY_IMG, AERIAL_IMG, RESTAURANT_IMG, HOTEL_IMG,
+  POOL_IMG, BAY_IMG, LOBBY_IMG, AERIAL_IMG, RESTAURANT_IMG,
 } from "./constants";
 
 function SlideHeader({ num, title, sub }: { num: string; title: string; sub: string }) {
@@ -76,57 +77,132 @@ export default function SlidesAbout() {
         <div className="max-w-6xl mx-auto">
           <SlideHeader num="Слайд 03" title="Геленджик — центр черноморского побережья" sub="Устойчивый рост туристического потока" />
 
-          {/* Bay photo full-width */}
-          <div className="relative rounded-sm overflow-hidden h-72 mb-14 shadow-xl">
-            <img src={BAY_IMG} alt="Геленджикская бухта" className="w-full h-full object-cover" />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 60%)" }} />
-            <div className="absolute left-8 top-1/2 -translate-y-1/2 text-white max-w-xs">
-              <div className="text-xs tracking-widest uppercase text-white/60 mb-2">Геленджикская бухта</div>
-              <div className="text-3xl font-bold mb-1">~4,7 млн</div>
-              <div className="text-sm text-white/80">туристов в 2025 году</div>
-              <div className="mt-2 text-green-400 font-bold text-lg">+12% к 2024</div>
-            </div>
-          </div>
+          <div className="grid md:grid-cols-2 gap-10 mb-12">
 
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>Туристический поток</h3>
-              <div className="space-y-1">
-                <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                  <span>Год</span><span className="text-center">Турпоток</span><span className="text-right">Динамика</span>
-                </div>
-                {[
-                  { year: "2023", val: "~3,8 млн чел.", dyn: "База", green: false },
-                  { year: "2024", val: "~4,2 млн чел.", dyn: "+10,5%", green: true },
-                  { year: "2025 (оценка)", val: "~4,7 млн чел.", dyn: "+12%", green: true },
-                ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-3 py-4 border-b border-gray-100 items-center">
-                    <span className="text-gray-800 font-medium text-sm">{row.year}</span>
-                    <span className="text-center text-gray-600 text-sm">{row.val}</span>
-                    <span className={`text-right font-bold text-sm ${row.green ? "text-green-600" : "text-gray-500"}`}>{row.dyn}</span>
-                  </div>
-                ))}
+            {/* ── BAR CHART ── */}
+            <div className="bg-white rounded-sm border border-gray-100 shadow-sm p-8">
+              <h3 className="font-bold text-sm tracking-widest uppercase mb-1" style={{ color: GOLD }}>
+                Туристический поток, млн чел.
+              </h3>
+              <p className="text-xs text-gray-400 mb-6">Геленджик, 2023–2025 гг.</p>
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart
+                  data={[
+                    { year: "2023", value: 3.8, dyn: "База" },
+                    { year: "2024", value: 4.2, dyn: "+10,5%" },
+                    { year: "2025*", value: 4.7, dyn: "+12%" },
+                  ]}
+                  margin={{ top: 28, right: 8, left: -8, bottom: 0 }}
+                  barCategoryGap="38%"
+                >
+                  <CartesianGrid vertical={false} stroke="#F0EDE8" />
+                  <XAxis dataKey="year" tick={{ fontSize: 12, fill: "#6B7280" }} axisLine={false} tickLine={false} />
+                  <YAxis domain={[3, 5.2]} tick={{ fontSize: 11, fill: "#9CA3AF" }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${v}`} />
+                  <Tooltip
+                    formatter={(v: number) => [`${v} млн чел.`]}
+                    contentStyle={{ borderRadius: 4, border: "1px solid #E5E7EB", fontSize: 12 }}
+                    cursor={{ fill: "rgba(201,169,110,0.06)" }}
+                  />
+                  <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={80}>
+                    <Cell fill="#A0AEC0" />
+                    <Cell fill={GOLD} />
+                    <Cell fill="#22c55e" />
+                    <LabelList
+                      dataKey="dyn"
+                      position="top"
+                      style={{ fontSize: 11, fontWeight: 700, fill: "#374151" }}
+                    />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <div className="flex gap-5 justify-center mt-4 text-xs text-gray-500">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-sm inline-block" style={{ background: "#A0AEC0" }} />2023 — База
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-sm inline-block" style={{ background: GOLD }} />2024 — +10,5%
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-sm inline-block bg-green-500" />2025* — +12%
+                </span>
               </div>
+              <p className="text-center text-gray-400 text-xs mt-2">* оценка</p>
             </div>
-            <div>
-              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>Транспортная доступность</h3>
-              <div className="space-y-1">
-                <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                  <span className="col-span-2">Направление</span><span className="text-right">Время</span>
-                </div>
+
+            {/* ── MAP ── */}
+            <div className="bg-white rounded-sm border border-gray-100 shadow-sm p-6 flex flex-col">
+              <h3 className="font-bold text-sm tracking-widest uppercase mb-1" style={{ color: GOLD }}>
+                Транспортная доступность
+              </h3>
+              <p className="text-xs text-gray-400 mb-4">Время в пути на автомобиле от Геленджика</p>
+
+              <div className="flex-1">
+                <svg viewBox="0 0 420 270" className="w-full" style={{ minHeight: 200 }}>
+                  {/* Sea */}
+                  <path d="M0,130 Q70,100 140,118 Q200,135 260,112 Q320,88 380,108 Q405,116 420,122 L420,270 L0,270 Z" fill="#DDEEFF" opacity="0.55" />
+                  <text x="300" y="210" textAnchor="middle" fontSize="10" fill="#7BA7C9" fontWeight="600" opacity="0.8">Чёрное море</text>
+                  <path d="M0,130 Q70,100 140,118 Q200,135 260,112 Q320,88 380,108 Q405,116 420,122" fill="none" stroke="#9EC5E8" strokeWidth="1.2" />
+
+                  {/* Крымский мост */}
+                  <path d="M52,162 Q30,175 15,180" fill="none" stroke="#9CA3AF" strokeWidth="1" strokeDasharray="3,2" />
+                  <text x="8" y="192" fontSize="7" fill="#9CA3AF">Крымский</text>
+                  <text x="8" y="201" fontSize="7" fill="#9CA3AF">мост</text>
+
+                  {/* Lines from Gelendzhik */}
+                  <line x1="212" y1="142" x2="104" y2="112" stroke="#C9A96E" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.65" />
+                  <line x1="212" y1="142" x2="155" y2="52" stroke="#C9A96E" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.65" />
+                  <line x1="212" y1="142" x2="348" y2="126" stroke="#C9A96E" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.65" />
+                  <line x1="212" y1="142" x2="52" y2="162" stroke="#C9A96E" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.65" />
+
+                  {/* GELENDZHIK */}
+                  <circle cx="212" cy="142" r="12" fill="#C9A96E" opacity="0.18" />
+                  <circle cx="212" cy="142" r="7" fill="#C9A96E" />
+                  <circle cx="212" cy="142" r="3" fill="white" />
+                  <text x="212" y="128" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7A5420">Геленджик</text>
+                  <text x="212" y="119" textAnchor="middle" fontSize="7.5" fill="#7A5420" opacity="0.8">River Rock</text>
+
+                  {/* Local airport marker */}
+                  <circle cx="226" cy="154" r="4" fill="#22c55e" opacity="0.9" />
+                  <text x="232" y="168" textAnchor="start" fontSize="7.5" fill="#15803d" fontWeight="700">✈ 15–20 мин</text>
+
+                  {/* ANAPA */}
+                  <circle cx="104" cy="112" r="5.5" fill="#6B7280" />
+                  <text x="104" y="100" textAnchor="middle" fontSize="9" fill="#374151" fontWeight="600">✈ Анапа</text>
+                  <rect x="78" y="84" width="52" height="14" rx="3" fill="#C9A96E" opacity="0.15" />
+                  <text x="104" y="94" textAnchor="middle" fontSize="8.5" fill="#92703A" fontWeight="700">1,5 ч · 90 км</text>
+
+                  {/* KRASNODAR */}
+                  <circle cx="155" cy="52" r="5.5" fill="#6B7280" />
+                  <text x="155" y="40" textAnchor="middle" fontSize="9" fill="#374151" fontWeight="600">Краснодар</text>
+                  <rect x="124" y="24" width="62" height="14" rx="3" fill="#C9A96E" opacity="0.15" />
+                  <text x="155" y="34" textAnchor="middle" fontSize="8.5" fill="#92703A" fontWeight="700">2,5 ч · 180 км</text>
+
+                  {/* SOCHI */}
+                  <circle cx="348" cy="126" r="5.5" fill="#6B7280" />
+                  <text x="358" y="118" textAnchor="start" fontSize="9" fill="#374151" fontWeight="600">✈ Сочи</text>
+                  <rect x="355" y="122" width="62" height="14" rx="3" fill="#C9A96E" opacity="0.15" />
+                  <text x="386" y="132" textAnchor="middle" fontSize="8.5" fill="#92703A" fontWeight="700">3,5–4 ч · 220 км</text>
+
+                  {/* SIMFEROPOL */}
+                  <circle cx="52" cy="162" r="5.5" fill="#6B7280" />
+                  <text x="52" y="150" textAnchor="middle" fontSize="9" fill="#374151" fontWeight="600">Симферополь</text>
+                  <rect x="18" y="134" width="68" height="14" rx="3" fill="#C9A96E" opacity="0.15" />
+                  <text x="52" y="144" textAnchor="middle" fontSize="8.5" fill="#92703A" fontWeight="700">4,5 ч · 280 км</text>
+                </svg>
+              </div>
+
+              {/* Legend strip */}
+              <div className="flex flex-wrap gap-x-5 gap-y-1.5 mt-3 pt-3 border-t border-gray-100">
                 {[
-                  { dir: "Аэропорт Геленджик", dist: "10 км", time: "15–20 мин" },
-                  { dir: "Аэропорт Анапа", dist: "90 км", time: "1,5 часа" },
-                  { dir: "Аэропорт Сочи", dist: "220 км", time: "3,5–4 ч" },
-                  { dir: "Симферополь", dist: "280 км", time: "4,5 ч" },
-                  { dir: "Краснодар", dist: "180 км", time: "2,5 ч" },
+                  { dir: "✈ Геленджик", time: "15–20 мин", accent: true },
+                  { dir: "✈ Анапа", time: "1,5 ч" },
+                  { dir: "Краснодар", time: "2,5 ч" },
+                  { dir: "✈ Сочи", time: "3,5–4 ч" },
+                  { dir: "Симферополь", time: "4,5 ч" },
                 ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-3 py-3 border-b border-gray-100 items-center">
-                    <div className="col-span-2">
-                      <div className="text-gray-800 text-sm">{row.dir}</div>
-                      <div className="text-gray-400 text-xs">{row.dist}</div>
-                    </div>
-                    <div className="text-right font-bold text-sm" style={{ color: GOLD }}>{row.time}</div>
+                  <div key={i} className="flex items-center gap-1">
+                    <span className="text-xs text-gray-500">{row.dir}</span>
+                    <span className="text-xs font-bold" style={{ color: row.accent ? "#22c55e" : GOLD }}>{row.time}</span>
                   </div>
                 ))}
               </div>
