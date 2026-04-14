@@ -1,5 +1,8 @@
 import Icon from "@/components/ui/icon";
-import { GOLD, GOLD_LIGHT, GOLD_BORDER, GOLD_BG, SERIF } from "./constants";
+import {
+  GOLD, GOLD_LIGHT, GOLD_BORDER, SERIF,
+  AERIAL_IMG, POOL_IMG,
+} from "./constants";
 
 function SlideHeader({ num, title, sub }: { num: string; title: string; sub: string }) {
   return (
@@ -21,11 +24,8 @@ export default function SlidesFinance() {
           <SlideHeader num="Слайд 12" title="Расчёт окупаемости" sub="Пример для лота 37,4 м² · Консервативный сценарий" />
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* Input data */}
             <div className="border border-gray-100 rounded-sm p-7 shadow-sm bg-gray-50/50">
-              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>
-                Исходные данные
-              </h3>
+              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>Исходные данные</h3>
               <div className="space-y-3">
                 {[
                   ["Стоимость лота (37,4 м²)", "50 490 000 ₽"],
@@ -43,11 +43,8 @@ export default function SlidesFinance() {
               </div>
             </div>
 
-            {/* Annual income */}
             <div className="border border-gray-100 rounded-sm p-7 shadow-sm">
-              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>
-                Годовой операционный доход
-              </h3>
+              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>Годовой операционный доход</h3>
               <div className="space-y-3">
                 {[
                   { k: "Валовая выручка", v: "≈ 6 643 000 ₽", bold: false },
@@ -55,17 +52,9 @@ export default function SlidesFinance() {
                   { k: "Налог УСН 6%", v: "–239 148 ₽", bold: false },
                   { k: "Чистый годовой доход", v: "≈ 3 746 652 ₽", bold: true },
                 ].map((item, i) => (
-                  <div
-                    key={i}
-                    className={`flex justify-between items-center py-2 border-b ${item.bold ? "border-t border-gray-200 mt-2 pt-4" : "border-gray-100"}`}
-                  >
+                  <div key={i} className={`flex justify-between items-center py-2 border-b ${item.bold ? "border-t border-gray-200 mt-2 pt-4" : "border-gray-100"}`}>
                     <span className={`text-sm ${item.bold ? "font-bold text-gray-900" : "text-gray-500"}`}>{item.k}</span>
-                    <span
-                      className="text-sm font-bold"
-                      style={item.bold ? { color: GOLD } : { color: "#374151" }}
-                    >
-                      {item.v}
-                    </span>
+                    <span className="text-sm font-bold" style={item.bold ? { color: GOLD } : { color: "#374151" }}>{item.v}</span>
                   </div>
                 ))}
               </div>
@@ -77,12 +66,9 @@ export default function SlidesFinance() {
             </div>
           </div>
 
-          {/* 5-year result */}
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             <div className="md:col-span-2 border border-gray-100 rounded-sm p-7 shadow-sm">
-              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>
-                Совокупный результат за 5 лет
-              </h3>
+              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>Совокупный результат за 5 лет</h3>
               <div className="space-y-1">
                 {[
                   ["Арендный доход (чистый)", "≈ 17 161 000 ₽"],
@@ -110,7 +96,6 @@ export default function SlidesFinance() {
             </div>
           </div>
 
-          {/* Installment plan */}
           <div className="rounded-sm p-7 mb-4 border" style={{ borderColor: GOLD_BORDER, background: "#FFFBF4" }}>
             <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>
               При льготной рассрочке (ПВ 30% + 11 мес. по 200 000 ₽ + остаток)
@@ -141,33 +126,13 @@ export default function SlidesFinance() {
           <SlideHeader num="Слайд 13" title="Условия приобретения" sub="Гибкие варианты оплаты и система скидок" />
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             {[
-              {
-                type: "100% оплата",
-                conditions: "Единовременный платёж",
-                discount: "–5%",
-                highlight: true,
-                price: "≈ 47 965 000 ₽",
-              },
-              {
-                type: "Стандартная рассрочка",
-                conditions: "ПВ 30%, остаток равными платежами до 12 мес.",
-                discount: "–3%",
-                highlight: false,
-                price: "≈ 48 975 000 ₽",
-              },
-              {
-                type: "Льготная рассрочка",
-                conditions: "ПВ 30% + 11 мес. по 200 000 ₽ + остаток в конце",
-                discount: "–3%",
-                highlight: false,
-                price: "≈ 48 975 000 ₽",
-              },
+              { type: "100% оплата", conditions: "Единовременный платёж", discount: "–5%", highlight: true, price: "≈ 47 965 000 ₽" },
+              { type: "Стандартная рассрочка", conditions: "ПВ 30%, остаток равными платежами до 12 мес.", discount: "–3%", highlight: false, price: "≈ 48 975 000 ₽" },
+              { type: "Льготная рассрочка", conditions: "ПВ 30% + 11 мес. по 200 000 ₽ + остаток в конце", discount: "–3%", highlight: false, price: "≈ 48 975 000 ₽" },
             ].map((item, i) => (
-              <div
-                key={i}
+              <div key={i}
                 className={`rounded-sm p-8 text-center ${item.highlight ? "shadow-md" : "bg-white border border-gray-100 shadow-sm"}`}
-                style={item.highlight ? { border: `1px solid ${GOLD_BORDER}`, background: "#FFFBF4" } : {}}
-              >
+                style={item.highlight ? { border: `1px solid ${GOLD_BORDER}`, background: "#FFFBF4" } : {}}>
                 <div className="font-bold text-lg mb-3 text-gray-900">{item.type}</div>
                 <div className="text-gray-500 text-sm mb-6 leading-relaxed">{item.conditions}</div>
                 <div className="text-5xl font-bold mb-2" style={{ color: GOLD }}>{item.discount}</div>
@@ -181,9 +146,7 @@ export default function SlidesFinance() {
           </div>
           <div className="bg-white border border-gray-100 rounded-sm p-6 text-center shadow-sm">
             <p className="text-gray-500 text-sm leading-relaxed">
-              Рассрочка беспроцентная · Договор по{" "}
-              <strong className="text-gray-700">ФЗ-214</strong> с{" "}
-              <strong className="text-gray-700">эскроу-счетами</strong> · Скидка от полной стоимости лота
+              Рассрочка беспроцентная · Договор по <strong className="text-gray-700">ФЗ-214</strong> с <strong className="text-gray-700">эскроу-счетами</strong> · Скидка от полной стоимости лота
             </p>
           </div>
         </div>
@@ -193,6 +156,17 @@ export default function SlidesFinance() {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SlideHeader num="Слайд 14" title="Почему River Rock Gelendzhik Bay" sub="Ключевые преимущества для инвестора" />
+
+          <div className="relative rounded-sm overflow-hidden h-52 mb-12 shadow-xl">
+            <img src={AERIAL_IMG} alt="River Rock Gelendzhik Bay" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 flex items-center justify-center"
+              style={{ background: "rgba(0,0,0,0.48)" }}>
+              <p className="text-white text-center px-8" style={{ fontFamily: SERIF, fontSize: "1.4rem" }}>
+                «Инвестиция с видом на море. Реальный актив. Проверенный оператор.»
+              </p>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { icon: "MapPin", factor: "Локация", desc: "Элитный район Толстого мыса, сосновые рощи, выход к морю" },
@@ -204,14 +178,8 @@ export default function SlidesFinance() {
               { icon: "BarChart2", factor: "Ликвидность", desc: "Реальный актив в премиальной локации с ростом турпотока" },
               { icon: "BadgePercent", factor: "Скидки", desc: "До 5% при 100% оплате, 3% при рассрочке" },
             ].map((item, i) => (
-              <div
-                key={i}
-                className="border border-gray-100 rounded-sm p-6 hover:border-amber-300 hover:-translate-y-1 transition-all bg-gray-50/50 shadow-sm hover:shadow-md"
-              >
-                <div
-                  className="w-10 h-10 rounded flex items-center justify-center mb-4"
-                  style={{ background: GOLD_LIGHT }}
-                >
+              <div key={i} className="border border-gray-100 rounded-sm p-6 hover:border-amber-300 hover:-translate-y-1 transition-all bg-gray-50/50 shadow-sm hover:shadow-md">
+                <div className="w-10 h-10 rounded flex items-center justify-center mb-4" style={{ background: GOLD_LIGHT }}>
                   <Icon name={item.icon} size={20} style={{ color: GOLD }} />
                 </div>
                 <div className="font-bold text-sm mb-2 text-gray-800">{item.factor}</div>
@@ -224,58 +192,51 @@ export default function SlidesFinance() {
 
       {/* ── SLIDE 15 — КОНТАКТЫ ── */}
       <section id="contacts" className="py-24 px-6" style={{ background: "#F7F5F0" }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-10">Слайд 15 · Контакты</div>
-          <h2 className="text-6xl font-bold mb-3 text-gray-900">RIVER ROCK</h2>
-          <h3 className="text-4xl font-light tracking-widest mb-3" style={{ color: GOLD }}>GELENDZHIK BAY</h3>
-          <p
-            className="text-gray-500 tracking-[0.2em] uppercase mb-14"
-            style={{ fontFamily: SERIF, fontSize: "1.15rem" }}
-          >
-            Бутик-отель премиум-класса 5★
-          </p>
+        <div className="max-w-4xl mx-auto">
+          {/* Hero photo with title */}
+          <div className="relative rounded-sm overflow-hidden h-64 mb-14 shadow-xl">
+            <img src={POOL_IMG} alt="River Rock" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center"
+              style={{ background: "rgba(0,0,0,0.52)" }}>
+              <h2 className="text-5xl font-bold text-white mb-2">RIVER ROCK</h2>
+              <h3 className="text-3xl font-light tracking-widest" style={{ color: GOLD }}>GELENDZHIK BAY</h3>
+              <p className="text-white/60 tracking-[0.2em] uppercase mt-2" style={{ fontFamily: SERIF, fontSize: "1rem" }}>
+                Бутик-отель премиум-класса 5★
+              </p>
+            </div>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-10">
-            <div className="bg-white border border-gray-100 rounded-sm p-7 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-sm p-7 shadow-sm text-center">
               <Icon name="MapPin" size={26} style={{ color: GOLD }} className="mx-auto mb-3" />
               <div className="font-bold text-sm mb-1 text-gray-800">Расположение</div>
               <div className="text-gray-500 text-sm">Геленджик, Толстый мыс</div>
             </div>
-            <div className="bg-white border border-gray-100 rounded-sm p-7 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-sm p-7 shadow-sm text-center">
               <Icon name="Globe" size={26} style={{ color: GOLD }} className="mx-auto mb-3" />
               <div className="font-bold text-sm mb-1 text-gray-800">Сайт</div>
-              <a
-                href="https://river-rock-gelendzhik.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm hover:opacity-75 transition-opacity"
-                style={{ color: GOLD }}
-              >
+              <a href="https://river-rock-gelendzhik.com/" target="_blank" rel="noopener noreferrer"
+                className="text-sm hover:opacity-75 transition-opacity" style={{ color: GOLD }}>
                 river-rock-gelendzhik.com
               </a>
             </div>
           </div>
 
-          <div className="bg-white border border-gray-100 rounded-sm p-6 max-w-2xl mx-auto mb-10 shadow-sm">
+          <div className="bg-white border border-gray-100 rounded-sm p-6 max-w-2xl mx-auto mb-10 shadow-sm text-center">
             <div className="text-xs text-gray-400 leading-relaxed">
-              Проектная декларация размещена на{" "}
-              <strong className="text-gray-600">наш.дом.рф</strong>
-              <br />
-              Строительство осуществляет{" "}
-              <strong className="text-gray-600">ООО «СЗ «Геленджик»</strong> в соответствии с ФЗ-214
+              Проектная декларация размещена на <strong className="text-gray-600">наш.дом.рф</strong><br />
+              Строительство осуществляет <strong className="text-gray-600">ООО «СЗ «Геленджик»</strong> в соответствии с ФЗ-214
             </div>
           </div>
 
-          <a
-            href="https://river-rock-gelendzhik.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-10 py-4 font-bold text-sm tracking-widest uppercase text-white transition-all hover:opacity-85 shadow-md"
-            style={{ background: GOLD }}
-          >
-            <Icon name="ExternalLink" size={16} />
-            Фотоконтент и подробности
-          </a>
+          <div className="text-center">
+            <a href="https://river-rock-gelendzhik.com/" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-10 py-4 font-bold text-sm tracking-widest uppercase text-white transition-all hover:opacity-85 shadow-md"
+              style={{ background: GOLD }}>
+              <Icon name="ExternalLink" size={16} />
+              Фотоконтент и подробности
+            </a>
+          </div>
         </div>
       </section>
 

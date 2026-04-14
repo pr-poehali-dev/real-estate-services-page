@@ -1,10 +1,8 @@
 import Icon from "@/components/ui/icon";
-import { GOLD, GOLD_LIGHT, GOLD_BORDER, GOLD_BG, SPA_IMG, HOTEL_IMG, SERIF } from "./constants";
-
-// Additional Tilda CDN photos from river-rock-gelendzhik.com
-const PHOTO_EXTERIOR = "https://static.tildacdn.com/tild6464-3033-4166-a439-313538303332/photo.jpg";
-const PHOTO_LOBBY = "https://static.tildacdn.com/tild6661-3131-4536-b736-656264633166/photo.jpg";
-const PHOTO_BAY = "https://static.tildacdn.com/tild3934-6261-4230-b139-653937323535/photo.jpg";
+import {
+  GOLD, GOLD_LIGHT, SERIF,
+  POOL_IMG, BAY_IMG, LOBBY_IMG, AERIAL_IMG, RESTAURANT_IMG, HOTEL_IMG,
+} from "./constants";
 
 function SlideHeader({ num, title, sub }: { num: string; title: string; sub: string }) {
   return (
@@ -24,7 +22,8 @@ export default function SlidesAbout() {
       <section id="concept" className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SlideHeader num="Слайд 02" title="Концепция проекта" sub="Инновационная гостиница премиум-класса" />
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+
+          <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
             <div>
               <p className="text-gray-700 leading-relaxed mb-10" style={{ fontFamily: SERIF, fontSize: "1.25rem" }}>
                 Сочетание архитектурной концепции, дизайна, опыта отельного оператора
@@ -51,12 +50,7 @@ export default function SlidesAbout() {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={SPA_IMG}
-                alt="Инфраструктура отеля"
-                className="rounded-sm w-full h-96 object-cover shadow-xl"
-                onError={(e) => { (e.target as HTMLImageElement).src = HOTEL_IMG; }}
-              />
+              <img src={LOBBY_IMG} alt="Лобби отеля" className="rounded-sm w-full h-96 object-cover shadow-xl" />
               <div
                 className="absolute bottom-0 left-0 right-0 p-6 rounded-b-sm"
                 style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75), transparent)" }}
@@ -67,6 +61,13 @@ export default function SlidesAbout() {
               </div>
             </div>
           </div>
+
+          {/* Photo strip */}
+          <div className="grid grid-cols-3 gap-4">
+            <img src={POOL_IMG} alt="Бассейн" className="w-full h-48 object-cover rounded-sm shadow-md" />
+            <img src={RESTAURANT_IMG} alt="Ресторан" className="w-full h-48 object-cover rounded-sm shadow-md" />
+            <img src={BAY_IMG} alt="Бухта Геленджик" className="w-full h-48 object-cover rounded-sm shadow-md" />
+          </div>
         </div>
       </section>
 
@@ -74,16 +75,25 @@ export default function SlidesAbout() {
       <section className="py-24 px-6" style={{ background: "#F7F5F0" }}>
         <div className="max-w-6xl mx-auto">
           <SlideHeader num="Слайд 03" title="Геленджик — центр черноморского побережья" sub="Устойчивый рост туристического потока" />
+
+          {/* Bay photo full-width */}
+          <div className="relative rounded-sm overflow-hidden h-72 mb-14 shadow-xl">
+            <img src={BAY_IMG} alt="Геленджикская бухта" className="w-full h-full object-cover" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 60%)" }} />
+            <div className="absolute left-8 top-1/2 -translate-y-1/2 text-white max-w-xs">
+              <div className="text-xs tracking-widest uppercase text-white/60 mb-2">Геленджикская бухта</div>
+              <div className="text-3xl font-bold mb-1">~4,7 млн</div>
+              <div className="text-sm text-white/80">туристов в 2025 году</div>
+              <div className="mt-2 text-green-400 font-bold text-lg">+12% к 2024</div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>
-                Туристический поток
-              </h3>
+              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>Туристический поток</h3>
               <div className="space-y-1">
                 <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                  <span>Год</span>
-                  <span className="text-center">Турпоток</span>
-                  <span className="text-right">Динамика</span>
+                  <span>Год</span><span className="text-center">Турпоток</span><span className="text-right">Динамика</span>
                 </div>
                 {[
                   { year: "2023", val: "~3,8 млн чел.", dyn: "База", green: false },
@@ -99,13 +109,10 @@ export default function SlidesAbout() {
               </div>
             </div>
             <div>
-              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>
-                Транспортная доступность
-              </h3>
+              <h3 className="font-bold text-sm tracking-widest uppercase mb-6" style={{ color: GOLD }}>Транспортная доступность</h3>
               <div className="space-y-1">
                 <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                  <span className="col-span-2">Направление</span>
-                  <span className="text-right">Время</span>
+                  <span className="col-span-2">Направление</span><span className="text-right">Время</span>
                 </div>
                 {[
                   { dir: "Аэропорт Геленджик", dist: "10 км", time: "15–20 мин" },
@@ -132,6 +139,7 @@ export default function SlidesAbout() {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SlideHeader num="Слайд 04" title="River Rock Hotels & Resorts" sub="Оператор мирового уровня" />
+
           <div className="grid md:grid-cols-3 gap-8 mb-14">
             {[
               { icon: "Users", num: "5+ млн", label: "постоянных клиентов сети" },
@@ -148,11 +156,8 @@ export default function SlidesAbout() {
             ))}
           </div>
 
-          {/* Geography */}
           <div className="border border-gray-100 rounded-sm p-8 shadow-sm" style={{ background: "#FAFAF8" }}>
-            <h3 className="font-bold text-sm tracking-widest uppercase mb-8" style={{ color: GOLD }}>
-              🌍 География присутствия
-            </h3>
+            <h3 className="font-bold text-sm tracking-widest uppercase mb-8" style={{ color: GOLD }}>🌍 География присутствия</h3>
             <div className="grid md:grid-cols-3 gap-8">
               <div>
                 <div className="flex items-center gap-2 mb-4">
@@ -221,10 +226,8 @@ export default function SlidesAbout() {
             ].map((person, i) => (
               <div key={i} className="bg-white border border-gray-100 rounded-sm p-8 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-4 mb-6">
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 text-lg font-bold"
-                    style={{ background: GOLD_LIGHT, color: GOLD }}
-                  >
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 text-lg font-bold"
+                    style={{ background: GOLD_LIGHT, color: GOLD }}>
                     {person.name.split(" ").map((n: string) => n[0]).join("")}
                   </div>
                   <div>
@@ -291,11 +294,11 @@ export default function SlidesAbout() {
       <section id="location" className="py-24 px-6" style={{ background: "#F7F5F0" }}>
         <div className="max-w-6xl mx-auto">
           <SlideHeader num="Слайд 07" title="Уникальная локация" sub="Элитный район Толстого мыса · Сосновые рощи · Море" />
+
           <div className="grid md:grid-cols-2 gap-8 mb-10">
             <div className="space-y-1">
               <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                <span className="col-span-2">Объект</span>
-                <span className="text-right">Время</span>
+                <span className="col-span-2">Объект</span><span className="text-right">Время</span>
               </div>
               {[
                 { obj: "Яхтенная марина", note: "На территории", time: "1–2 мин", hot: true },
@@ -307,10 +310,8 @@ export default function SlidesAbout() {
               ].map((row, i) => (
                 <div key={i} className="grid grid-cols-3 py-3 border-b border-gray-100 items-center">
                   <div className="col-span-2">
-                    <span
-                      className={`text-sm ${row.hot ? "font-bold" : "text-gray-700"}`}
-                      style={row.hot ? { color: GOLD } : {}}
-                    >
+                    <span className={`text-sm ${row.hot ? "font-bold" : "text-gray-700"}`}
+                      style={row.hot ? { color: GOLD } : {}}>
                       {row.obj}
                     </span>
                     <div className="text-gray-400 text-xs">{row.note}</div>
@@ -321,8 +322,7 @@ export default function SlidesAbout() {
             </div>
             <div className="space-y-1">
               <div className="grid grid-cols-3 text-xs text-gray-400 pb-3 border-b border-gray-200 tracking-wider uppercase">
-                <span className="col-span-2">Объект</span>
-                <span className="text-right">Время</span>
+                <span className="col-span-2">Объект</span><span className="text-right">Время</span>
               </div>
               {[
                 { obj: "Винодельня «Шато де Талю»", note: "~7 км", time: "15 мин" },
@@ -342,13 +342,12 @@ export default function SlidesAbout() {
               ))}
             </div>
           </div>
-          {/* Photo banner */}
+
+          {/* Photo banner with quote */}
           <div className="relative rounded-sm overflow-hidden h-72 shadow-xl">
-            <img src={HOTEL_IMG} alt="Локация" className="w-full h-full object-cover" />
-            <div
-              className="absolute inset-0 flex items-end p-8"
-              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }}
-            >
+            <img src={AERIAL_IMG} alt="Локация" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 flex items-end p-8"
+              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }}>
               <p className="text-white/90 italic" style={{ fontFamily: SERIF, fontSize: "1.15rem" }}>
                 «Уникальное сочетание природного уединения и доступности всей премиальной инфраструктуры курорта.»
               </p>
